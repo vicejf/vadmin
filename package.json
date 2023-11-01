@@ -1,9 +1,9 @@
 {
-  "name": "vben-admin",
+  "name": "hec-drq-cas",
   "version": "2.10.0",
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
+  "homepage": "https://172.17.142.200",
   "bugs": {
-    "url": "https://github.com/vbenjs/vue-vben-admin/issues"
+    "url": "https://172.17.142.200"
   },
   "repository": {
     "type": "git",
@@ -11,9 +11,9 @@
   },
   "license": "MIT",
   "author": {
-    "name": "vben",
-    "email": "anncwb@126.com",
-    "url": "https://github.com/anncwb"
+    "name": "chenjianfei",
+    "email": "jianfeichan@qq.com",
+    "url":"https://172.17.142.200"
   },
   "scripts": {
     "bootstrap": "pnpm install",
@@ -23,7 +23,7 @@
     "build:no-cache": "pnpm clean:cache && npm run build",
     "build:test": "cross-env NODE_OPTIONS=--max-old-space-size=8192 pnpm vite build --mode test",
     "commit": "czg",
-    "dev": "pnpm vite",
+    "dev": "pnpm vite --port 443",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "turbo run stub",
     "lint": "turbo run lint",

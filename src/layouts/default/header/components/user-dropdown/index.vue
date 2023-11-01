@@ -11,19 +11,19 @@
 
     <template #overlay>
       <Menu @click="handleMenuClick">
-        <MenuItem
+        <!-- <MenuItem
           key="doc"
           :text="t('layout.header.dropdownItemDoc')"
           icon="ion:document-text-outline"
           v-if="getShowDoc"
-        />
-        <MenuDivider v-if="getShowDoc" />
+        /> -->
         <MenuItem
           v-if="getUseLockPage"
           key="lock"
           :text="t('layout.header.tooltipLock')"
           icon="ion:lock-closed-outline"
         />
+        <MenuDivider v-if="getShowDoc" />
         <MenuItem
           key="logout"
           :text="t('layout.header.dropdownItemLoginOut')"
@@ -41,7 +41,7 @@
 
   import { defineComponent, computed } from 'vue';
 
-  import { DOC_URL } from '/@/settings/siteSetting';
+  // import { DOC_URL } from '/@/settings/siteSetting';
 
   import { useUserStore } from '/@/store/modules/user';
   import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
@@ -51,7 +51,7 @@
 
   import headerImg from '/@/assets/images/header.jpg';
   import { propTypes } from '/@/utils/propTypes';
-  import { openWindow } from '/@/utils';
+  // import { openWindow } from '/@/utils';
 
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
 
@@ -92,9 +92,9 @@
       }
 
       // open doc
-      function openDoc() {
-        openWindow(DOC_URL);
-      }
+      // function openDoc() {
+      //   openWindow(DOC_URL);
+      // }
 
       function handleMenuClick(e: MenuInfo) {
         switch (e.key as MenuEvent) {
@@ -102,7 +102,7 @@
             handleLoginOut();
             break;
           case 'doc':
-            openDoc();
+            // openDoc();
             break;
           case 'lock':
             handleLock();
