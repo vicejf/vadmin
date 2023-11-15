@@ -9,6 +9,7 @@
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { accountFormSchema } from './account.data';
   import { getDeptList } from '/@/api/demo/system';
+  import { register } from '/@/api/sys/user';
 
   export default defineComponent({
     name: 'AccountModal',
@@ -60,7 +61,7 @@
           const values = await validate();
           setModalProps({ confirmLoading: true });
           // TODO custom api
-          console.log(values);
+          register(values);
           closeModal();
           emit('success', { isUpdate: unref(isUpdate), values: { ...values, id: rowId.value } });
         } finally {

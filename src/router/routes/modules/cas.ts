@@ -12,7 +12,7 @@ const cas: AppRouteModule = {
     hideChildrenInMenu: true,
     icon: 'streamline:money-cash-bag-dollar-bag-payment-cash-money-finance',
     title: t('routes.cas.cas'),
-    orderNo: 14,
+    orderNo: 9,
   },
   children: [
     {

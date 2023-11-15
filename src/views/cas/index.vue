@@ -1,6 +1,5 @@
 <template>
   <PageWrapper
-    title="成本核算"
     content="在现代成本管理的过程中，预测、决策、分析、控制和核算都是密不可分的，在预测、决策中要进行成本的分析，要对企业核算的数据进行研究，并且核算的数据也是其他各个环节的依据。"
     contentFullHeight
     fixedHeight
@@ -18,18 +17,21 @@
   import { PageWrapper } from '/@/components/Page';
   import { useMessage } from '/@/hooks/web/useMessage';
   // import { vxeTableColumns } from '/@/views/demo/table/tableData';
-  import { demoListApi } from '/@/api/demo/table';
+  // import { demoListApi } from '/@/api/demo/table';
   import { VxeGridProps, VxeGridInstance } from 'vxe-table';
+
+  import { VxeColumnPropTypes } from 'vxe-table/types/column';
 
   const { createMessage } = useMessage();
 
   const tableRef = ref<VxeGridInstance>();
-
   const $gird = tableRef.value;
 
   interface RowVO {
     [key: string]: any;
   }
+
+  const nameOptions = ref<VxeColumnPropTypes.Filter[]>([{ data: '' }]);
 
   // 模拟分页接口
   const findPageList = (currentPage: number, pageSize: number) => {
@@ -175,12 +177,19 @@
     columns: [
       { type: 'checkbox', width: 50 },
       { type: 'seq', width: 60 },
-      { field: 'name', title: 'Name' },
+      {
+        field: 'name',
+        title: 'Name',
+        filters: nameOptions.value,
+      },
       { field: 'nickname', title: 'Nickname' },
       { field: 'role', title: 'Role' },
       { field: 'address', title: 'Address', showOverflow: true },
     ],
     toolbarConfig: {
+      import: true,
+      export: true,
+      custom: true,
       buttons: [
         {
           content: '在第一行新增',
@@ -226,6 +235,7 @@
         },
         {
           field: 'email',
+          visible: false,
           title: '邮件',
           span: 8,
           titlePrefix: {
@@ -281,6 +291,15 @@
         },
       ],
     },
+    importConfig: {
+      // 自定义类型
+      types: ['xlsx'],
+    },
+    exportConfig: {
+      type: 'xlsx',
+      // 自定义类型
+      types: ['xlsx', 'csv', 'html', 'xml', 'txt'],
+    },
     pagerConfig: {
       enabled: true,
       pageSize: 10,
@@ -299,13 +318,14 @@
           // 调用接口获取数据
           const response = await findPageList(page.currentPage, page.pageSize);
 
-          const dataList = response.result;
+          // const dataList = response.result;
 
           if (form.name) {
-            const filteredList = dataList.filter((item) => {
-              // 在这里添加过滤条件，例如：
-              return item.name === form.name;
-            });
+            const filteredList = customFilter();
+            // const filteredList = dataList?.values.filter((item) => {
+            //   // 在这里添加过滤条件，例如：
+            //   return item.name.startsWith(form.name);
+            // });
             return {
               result: filteredList,
               page: {
@@ -316,12 +336,38 @@
 
           return response;
         },
-        queryAll: async ({ form }) => {
-          return await demoListApi(form);
-        },
+        // queryAll: async ({ form }) => {
+        //   return await demoListApi(form);
+        // },
       },
     },
   });
+  // 自定义筛选
+  const customFilter = (): RowVO[] => {
+    if (tableRef.value) {
+      const column = tableRef.value.getColumnByField('name');
+
+      if (column) {
+        // Modify first option to checked state
+        const options = column.filters;
+        // options[0].data = 'Test2';
+        options[0].value = 'Test1';
+        // options[0].checked = true;
+        tableRef.value.setFilter(column, options);
+        // Update grid data
+        tableRef.value.updateData();
+
+        // Get updated grid data
+        const gridData = tableRef.value.getTableData();
+
+        if (gridData && gridData.visibleData) {
+          return gridData.visibleData as RowVO[];
+        }
+      }
+    }
+
+    return [];
+  };
 
   // 操作按钮（权限控制）
   // const createActions = (record) => {

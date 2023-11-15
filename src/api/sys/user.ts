@@ -1,5 +1,10 @@
 import { defHttp } from '/@/utils/http/axios';
-import { LoginParams, LoginResultModel, GetUserInfoModel } from './model/userModel';
+import {
+  LoginParams,
+  LoginResultModel,
+  GetUserInfoModel,
+  RegisterInfoModel,
+} from './model/userModel';
 
 import { ErrorMessageMode } from '/#/axios';
 
@@ -9,6 +14,7 @@ enum Api {
   GetUserInfo = '/getUserInfo',
   GetPermCode = '/getPermCode',
   TestRetry = '/testRetry',
+  register = '/system/register',
 }
 
 /**
@@ -52,4 +58,8 @@ export function testRetry() {
       },
     },
   );
+}
+
+export function register(params: RegisterInfoModel) {
+  return defHttp.post({ url: Api.register, params });
 }

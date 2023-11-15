@@ -4,6 +4,8 @@ import '@/components/VxeTable/src/css/index.scss';
 import 'ant-design-vue/dist/reset.css';
 // Register icon sprite
 import 'virtual:svg-icons-register';
+import VXETablePluginExportXLSX from 'vxe-table-plugin-export-xlsx';
+import VXETable from 'vxe-table';
 
 import { createApp } from 'vue';
 
@@ -20,7 +22,8 @@ import App from './App.vue';
 
 async function bootstrap() {
   const app = createApp(App);
-
+  VXETable.use(VXETablePluginExportXLSX);
+  app.use(VXETable);
   // Configure store
   // 配置 store
   setupStore(app);

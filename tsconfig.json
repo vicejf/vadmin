@@ -4,6 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "declaration": false,
+    "jsx": "react",
     "types": ["vite/client"],
     "paths": {
       "/@/*": ["src/*"],
