@@ -44,43 +44,6 @@ const fakeCodeList: any = {
   '2': ['2000', '4000', '6000'],
 };
 export default [
-  // mock user login
-  // {
-  //   url: '/basic-api/login',
-  //   timeout: 200,
-  //   method: 'post',
-  //   response: (request: requestParams,{ body }) => {
-  //     const { username, password } = body;
-  //     const checkUser = createFakeUserList().find(
-  //       (item) => item.username === username && password === item.password,
-  //     );
-  //     if (!checkUser) {
-  //       return resultError('Incorrect account or password！');
-  //     }
-  //     const { userId, username: _username, token, realName, desc, roles } = checkUser;
-  //     return resultSuccess({
-  //       roles,
-  //       userId,
-  //       username: _username,
-  //       token,
-  //       realName,
-  //       desc,
-  //     });
-  //   },
-  // },
-  // {
-  //   url: '/basic-api/getUserInfo',
-  //   method: 'get',
-  //   response: (request: requestParams) => {
-  //     const token = getRequestToken(request);
-  //     if (!token) return resultError('Invalid token');
-  //     const checkUser = createFakeUserList().find((item) => item.token === token);
-  //     if (!checkUser) {
-  //       return resultError('The corresponding user information was not obtained!');
-  //     }
-  //     return resultSuccess(checkUser);
-  //   },
-  // },
   {
     url: '/basic-api/getPermCode',
     timeout: 200,

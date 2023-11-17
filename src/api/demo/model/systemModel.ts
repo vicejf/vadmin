@@ -35,8 +35,8 @@ export interface AccountListItem {
 
 export interface DeptListItem {
   id: string;
-  orderNo: string;
-  createTime: string;
+  orderno: string;
+  createtime: string;
   remark: string;
   status: number;
 }
