@@ -162,8 +162,6 @@ Support modern browsers, not IE
 
 ## Maintainer
 
-[@Vben](https://github.com/anncwb)
-
 ## Donate
 
 If you think this project is helpful to you, you can help the author buy a cup of coffee to show your support!

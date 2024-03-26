@@ -1,5 +1,5 @@
 {
-  "name": "@vben/vite-config",
+  "name": "@cas/vite-config",
   "version": "1.0.0",
   "private": true,
   "homepage": "https://github.com/vbenjs/vue-vben-admin",

@@ -80,7 +80,7 @@
   import LogoImg from '/@/assets/images/logo.png';
   import { CollapseContainer } from '/@/components/Container/index';
   import { PageWrapper } from '/@/components/Page';
-  import { type Nullable } from '@vben/types';
+  import { type Nullable } from '@cas/types';
 
   const qrCodeUrl = 'https://www.vvbin.cn';
   export default defineComponent({

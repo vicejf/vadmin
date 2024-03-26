@@ -29,7 +29,7 @@
   import { useFullscreen } from '@vueuse/core';
 
   import { PageWrapper } from '/@/components/Page';
-  import { type Nullable } from '@vben/types';
+  import { type Nullable } from '@cas/types';
 
   export default defineComponent({
     components: { CollapseContainer, PageWrapper },

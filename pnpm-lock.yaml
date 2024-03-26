@@ -11,33 +11,33 @@ importers:
       '@ant-design/icons-vue':
         specifier: ^6.1.0
         version: 6.1.0(vue@3.3.7)
+      '@cas/eslint-config':
+        specifier: workspace:*
+        version: link:internal/eslint-config
+      '@cas/hooks':
+        specifier: workspace:*
+        version: link:packages/hooks
+      '@cas/ts-config':
+        specifier: workspace:*
+        version: link:internal/ts-config
+      '@cas/types':
+        specifier: workspace:*
+        version: link:packages/types
+      '@cas/vite-config':
+        specifier: workspace:*
+        version: link:internal/vite-config
       '@iconify/iconify':
         specifier: ^3.1.1
         version: 3.1.1
+      '@internal/stylelint-config':
+        specifier: workspace:*
+        version: link:internal/stylelint-config
       '@logicflow/core':
         specifier: ^1.2.9
         version: 1.2.17
       '@logicflow/extension':
         specifier: ^1.2.9
         version: 1.2.18(ts-node@10.9.1)
-      '@vben/eslint-config':
-        specifier: workspace:*
-        version: link:internal/eslint-config
-      '@vben/hooks':
-        specifier: workspace:*
-        version: link:packages/hooks
-      '@vben/stylelint-config':
-        specifier: workspace:*
-        version: link:internal/stylelint-config
-      '@vben/ts-config':
-        specifier: workspace:*
-        version: link:internal/ts-config
-      '@vben/types':
-        specifier: workspace:*
-        version: link:packages/types
-      '@vben/vite-config':
-        specifier: workspace:*
-        version: link:internal/vite-config
       '@vue/shared':
         specifier: ^3.3.4
         version: 3.3.7
@@ -459,7 +459,7 @@ importers:
         specifier: ^3.3.4
         version: 3.3.7(typescript@5.2.2)
     devDependencies:
-      '@vben/types':
+      '@cas/types':
         specifier: workspace:*
         version: link:../types
 

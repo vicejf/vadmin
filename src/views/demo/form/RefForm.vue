@@ -70,7 +70,7 @@
   import { CollapseContainer } from '/@/components/Container/index';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { PageWrapper } from '/@/components/Page';
-  import { type Nullable } from '@vben/types';
+  import { type Nullable } from '@cas/types';
 
   const schemas: FormSchema[] = [
     {

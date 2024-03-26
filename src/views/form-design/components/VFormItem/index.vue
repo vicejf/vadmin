@@ -40,7 +40,7 @@
   </Col>
 </template>
 <script lang="ts">
-  import { type Recordable } from '@vben/types';
+  import { type Recordable } from '@cas/types';
   import { defineComponent, reactive, toRefs, computed, PropType, unref } from 'vue';
   import { componentMap } from '../../core/formItemConfig';
   import { IVFormComponent, IFormConfig } from '../../typings/v-form-component';

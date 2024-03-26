@@ -33,7 +33,7 @@
   import { treeData } from './data';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { PageWrapper } from '/@/components/Page';
-  import { type Nullable } from '@vben/types';
+  import { type Nullable } from '@cas/types';
 
   export default defineComponent({
     components: { BasicTree, PageWrapper },

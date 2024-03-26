@@ -56,7 +56,7 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { type Recordable } from '@vben/types';
+  import { type Recordable } from '@cas/types';
   import { computed, defineComponent, unref, ref } from 'vue';
   import { BasicForm, FormSchema, ApiSelect } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container';

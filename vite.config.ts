@@ -1,4 +1,4 @@
-import { defineApplicationConfig } from '@vben/vite-config';
+import { defineApplicationConfig } from '@cas/vite-config';
 import fs from 'fs';
 
 export default defineApplicationConfig({
@@ -23,7 +23,8 @@ export default defineApplicationConfig({
       },
       proxy: {
         '/basic-api': {
-          target: 'https://172.17.142.200:8443',
+          target: 'https://192.168.7.148:8443',
+          // target: 'https://172.17.142.200:8443',
           changeOrigin: false,
           ws: true,
           // rewrite: (path) => path.replace(/^\/basic-api/, ''),
@@ -32,7 +33,7 @@ export default defineApplicationConfig({
           secure: false,
         },
         '/upload': {
-          target: 'http://172.17.142.200:8443/upload',
+          target: 'http://192.168.7.148:8443/upload',
           changeOrigin: true,
           ws: true,
           rewrite: (path) => path.replace(new RegExp(`^/upload`), ''),

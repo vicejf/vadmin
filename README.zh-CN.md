@@ -169,7 +169,6 @@ docker run --name vue-vben-admin -d -p 6666:80  -e VG_BASE_URL=http://localhost:
 
 ## 维护者
 
-[@Vben](https://github.com/anncwb)
 
 ## 捐赠
 

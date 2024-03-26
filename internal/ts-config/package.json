@@ -1,5 +1,5 @@
 {
-  "name": "@vben/ts-config",
+  "name": "@cas/ts-config",
   "version": "1.0.0",
   "private": true,
   "homepage": "https://github.com/vbenjs/vue-vben-admin",

@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ['@vben'],
+  extends: ['@cas'],
   rules: {
     'no-undef': 'off',
   },
