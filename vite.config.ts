@@ -1,4 +1,5 @@
 import { defineApplicationConfig } from '@vben/vite-config';
+import fs from 'fs';
 
 export default defineApplicationConfig({
   overrides: {
@@ -15,17 +16,22 @@ export default defineApplicationConfig({
       ],
     },
     server: {
+      host: true,
+      https: {
+        pfx: fs.readFileSync('keystore.p12'),
+        passphrase: 'Hec123456.', // 如果证书有密码，请提供密码
+      },
       proxy: {
         '/basic-api': {
-          target: 'http://localhost:3000',
+          target: 'https://localhost:8443',
           changeOrigin: true,
           ws: true,
           rewrite: (path) => path.replace(new RegExp(`^/basic-api`), ''),
           // only https
-          // secure: false
+          secure: false,
         },
         '/upload': {
-          target: 'http://localhost:3300/upload',
+          target: 'https://localhost:3300/upload',
           changeOrigin: true,
           ws: true,
           rewrite: (path) => path.replace(new RegExp(`^/upload`), ''),
