@@ -17,9 +17,8 @@
   import { PageWrapper } from '@/components/Page';
   import { useMessage } from '@/hooks/web/useMessage';
   // import { vxeTableColumns } from '/@/views/demo/table/tableData';
-  // import { demoListApi } from '/@/api/demo/table';
+  import { findPageList } from '@/api/sys/dataview';
   import { VxeGridProps, VxeGridInstance } from 'vxe-table';
-
   import { VxeColumnPropTypes } from 'vxe-table/types/all';
 
   const { createMessage } = useMessage();
@@ -33,143 +32,6 @@
 
   const nameOptions = ref<VxeColumnPropTypes.Filter[]>([{ data: '' }]);
 
-  // 模拟分页接口
-  const findPageList = (currentPage: number, pageSize: number) => {
-    return new Promise<{
-      page: {
-        total: number;
-      };
-      result: RowVO[];
-    }>((resolve) => {
-      setTimeout(() => {
-        const list = [
-          {
-            id: 10001,
-            name: 'Test1',
-            nickname: 'T1',
-            role: 'Develop',
-            sex: 'Man',
-            age: 28,
-            address: 'Shenzhen',
-          },
-          {
-            id: 10002,
-            name: 'Test2',
-            nickname: 'T2',
-            role: 'Test',
-            sex: 'Women',
-            age: 22,
-            address: 'Guangzhou',
-          },
-          {
-            id: 10003,
-            name: 'Test3',
-            nickname: 'T3',
-            role: 'PM',
-            sex: 'Man',
-            age: 32,
-            address: 'Shanghai',
-          },
-          {
-            id: 10004,
-            name: 'Test4',
-            nickname: 'T4',
-            role: 'Designer',
-            sex: 'Women',
-            age: 23,
-            address: 'Shenzhen',
-          },
-          {
-            id: 10005,
-            name: 'Test5',
-            nickname: 'T5',
-            role: 'Develop',
-            sex: 'Women',
-            age: 30,
-            address: 'Shanghai',
-          },
-          {
-            id: 10006,
-            name: 'Test6',
-            nickname: 'T6',
-            role: 'Designer',
-            sex: 'Women',
-            age: 21,
-            address: 'Shenzhen',
-          },
-          {
-            id: 10007,
-            name: 'Test7',
-            nickname: 'T7',
-            role: 'Test',
-            sex: 'Man',
-            age: 29,
-            address: 'test abc',
-          },
-          {
-            id: 10008,
-            name: 'Test8',
-            nickname: 'T8',
-            role: 'Develop',
-            sex: 'Man',
-            age: 35,
-            address: 'Shenzhen',
-          },
-          {
-            id: 10009,
-            name: 'Test9',
-            nickname: 'T9',
-            role: 'Develop',
-            sex: 'Man',
-            age: 35,
-            address: 'Shenzhen',
-          },
-          {
-            id: 100010,
-            name: 'Test10',
-            nickname: 'T10',
-            role: 'Develop',
-            sex: 'Man',
-            age: 35,
-            address: 'Guangzhou',
-          },
-          {
-            id: 100011,
-            name: 'Test11',
-            nickname: 'T11',
-            role: 'Test',
-            sex: 'Women',
-            age: 26,
-            address: 'test abc',
-          },
-          {
-            id: 100012,
-            name: 'Test12',
-            nickname: 'T12',
-            role: 'Develop',
-            sex: 'Man',
-            age: 34,
-            address: 'Guangzhou',
-          },
-          {
-            id: 100013,
-            name: 'Test13',
-            nickname: 'T13',
-            role: 'Test',
-            sex: 'Women',
-            age: 22,
-            address: 'Shenzhen',
-          },
-        ];
-        resolve({
-          page: {
-            total: list.length,
-          },
-          result: list.slice((currentPage - 1) * pageSize, currentPage * pageSize),
-        });
-      }, 100);
-    });
-  };
   const gridOptions = reactive<VxeGridProps<RowVO>>({
     id: 'VxeTable',
     keepSource: true,
@@ -178,8 +40,8 @@
       { type: 'checkbox', width: 50 },
       { type: 'seq', width: 60 },
       {
-        field: 'name',
-        title: 'Name',
+        field: 'title',
+        title: 'title',
         filters: nameOptions.value,
       },
       { field: 'nickname', title: 'Nickname' },
@@ -234,9 +96,9 @@
           itemRender: { name: '$input', props: { placeholder: '请输入名称' } },
         },
         {
-          field: 'email',
-          visible: false,
-          title: '邮件',
+          field: 'title',
+          // visible: false,
+          title: '标题',
           span: 8,
           titlePrefix: {
             useHTML: true,
@@ -316,11 +178,12 @@
       ajax: {
         query: async ({ page, form }) => {
           // 调用接口获取数据
-          const response = await findPageList(page.currentPage, page.pageSize);
+          const response = await findPageList(page);
 
           // const dataList = response.result;
 
           if (form.name) {
+            console.log('responsedata1', response.result.values);
             const filteredList = customFilter();
             // const filteredList = dataList?.values.filter((item) => {
             //   // 在这里添加过滤条件，例如：
@@ -333,8 +196,8 @@
               },
             };
           }
-
-          return response;
+          console.log('responsedata2', response.result.values);
+          return response.result.values;
         },
         // queryAll: async ({ form }) => {
         //   return await demoListApi(form);
