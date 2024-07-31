@@ -5,9 +5,9 @@ import { t } from '@/hooks/web/useI18n';
 
 const dataview: AppRouteModule = {
   path: '/dataview',
-  name: 'dataview',
+  name: 'Dataview',
   component: LAYOUT,
-  redirect: '/dataview/index',
+  redirect: '/dataview/fetchtable',
   meta: {
     hideChildrenInMenu: true,
     icon: 'streamline:money-cash-bag-dollar-bag-payment-cash-money-finance',
@@ -16,11 +16,11 @@ const dataview: AppRouteModule = {
   },
   children: [
     {
-      path: 'index',
-      name: 'CasPage',
-      component: () => import('@/views/dataview/index.vue'),
+      path: 'fetchtable',
+      name: 'Fetchtable',
+      component: () => import('@/views/dataview/Fetchtable.vue'),
       meta: {
-        title: t('routes.dataview.dataview'),
+        title: t('routes.dataview.fetchtable'),
         hideMenu: true,
       },
     },

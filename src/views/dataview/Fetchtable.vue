@@ -5,6 +5,9 @@
     fixedHeight
   > -->
   <vxe-grid ref="tableRef" v-bind="gridOptions">
+    <template #expand_content="{ row }">
+      <div>直达地址：{{ row.url }}</div>
+    </template>
     <!-- <template #action="{ row }">
         <TableAction outside :actions="createActions(row)" />
       </template> -->
@@ -39,16 +42,25 @@
     columns: [
       { type: 'checkbox', width: 50 },
       { type: 'seq', width: 60 },
+      { type: 'expand', width: 80, slots: { content: 'expand_content' } },
       {
         field: 'title',
         title: '标题',
         filters: nameOptions.value,
+        type: 'html',
+        formatter: (params) =>
+          `<a href="${params.row.url}" target="_blank">${params.cellValue}</a>`,
         width: 'auto',
         resizable: true,
       },
-      { field: 'date', title: '日期', width: 200 },
+      { field: 'date', title: '日期', width: 200, sortable: true },
       { field: 'postedFlag', title: 'posted', width: 80 },
-      { field: 'url', title: 'url', showOverflow: true },
+      {
+        field: 'url',
+        title: 'url',
+        visible: false,
+        showOverflow: true,
+      },
     ],
     toolbarConfig: {
       import: true,

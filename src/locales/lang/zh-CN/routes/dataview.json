@@ -1,4 +1,4 @@
 {
-  "dataview": "数据表",
-  "routes.dataview.dataview": "数据表"
+  "fetchtable": "数据表",
+  "dataview": "数据预览"
 }
