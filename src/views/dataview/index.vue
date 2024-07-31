@@ -180,24 +180,17 @@
           // 调用接口获取数据
           const response = await findPageList(page);
 
-          // const dataList = response.result;
+          // const dataList = response;
 
-          if (form.name) {
-            console.log('responsedata1', response.result.values);
-            const filteredList = customFilter();
-            // const filteredList = dataList?.values.filter((item) => {
-            //   // 在这里添加过滤条件，例如：
-            //   return item.name.startsWith(form.name);
-            // });
-            return {
-              result: filteredList,
-              page: {
-                total: filteredList.length,
-              },
-            };
+          if (form.title) {
+            // dataList = customFilter();
           }
-          console.log('responsedata2', response.result.values);
-          return response.result.values;
+          return {
+            result: response.items,
+            page: {
+              total: response.total,
+            },
+          };
         },
         // queryAll: async ({ form }) => {
         //   return await demoListApi(form);
@@ -206,31 +199,31 @@
     },
   });
   // 自定义筛选
-  const customFilter = (): RowVO[] => {
-    if (tableRef.value) {
-      const column = tableRef.value.getColumnByField('name');
+  // const customFilter = (): RowVO[] => {
+  //   if (tableRef.value) {
+  //     const column = tableRef.value.getColumnByField('name');
 
-      if (column) {
-        // Modify first option to checked state
-        const options = column.filters;
-        // options[0].data = 'Test2';
-        options[0].value = 'Test1';
-        // options[0].checked = true;
-        tableRef.value.setFilter(column, options);
-        // Update grid data
-        tableRef.value.updateData();
+  //     if (column) {
+  //       // Modify first option to checked state
+  //       const options = column.filters;
+  //       // options[0].data = 'Test2';
+  //       options[0].value = 'Test1';
+  //       // options[0].checked = true;
+  //       tableRef.value.setFilter(column, options);
+  //       // Update grid data
+  //       tableRef.value.updateData();
 
-        // Get updated grid data
-        const gridData = tableRef.value.getTableData();
+  //       // Get updated grid data
+  //       const gridData = tableRef.value.getTableData();
 
-        if (gridData && gridData.visibleData) {
-          return gridData.visibleData as RowVO[];
-        }
-      }
-    }
+  //       if (gridData && gridData.visibleData) {
+  //         return gridData.visibleData as RowVO[];
+  //       }
+  //     }
+  //   }
 
-    return [];
-  };
+  //   return [];
+  // };
 
   // 操作按钮（权限控制）
   // const createActions = (record) => {
