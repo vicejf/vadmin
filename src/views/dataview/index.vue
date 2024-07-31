@@ -1,20 +1,20 @@
 <template>
-  <PageWrapper
+  <!-- <PageWrapper
     content="在现代成本管理的过程中，预测、决策、分析、控制和核算都是密不可分的，在预测、决策中要进行成本的分析，要对企业核算的数据进行研究，并且核算的数据也是其他各个环节的依据。"
     contentFullHeight
     fixedHeight
-  >
-    <vxe-grid ref="tableRef" v-bind="gridOptions">
-      <!-- <template #action="{ row }">
+  > -->
+  <vxe-grid ref="tableRef" v-bind="gridOptions">
+    <!-- <template #action="{ row }">
         <TableAction outside :actions="createActions(row)" />
       </template> -->
-    </vxe-grid>
-  </PageWrapper>
+  </vxe-grid>
+  <!-- </PageWrapper> -->
 </template>
 <script lang="ts" setup>
   import { reactive, ref } from 'vue';
   // import { ActionItem, TableAction } from '/@/components/Table';
-  import { PageWrapper } from '@/components/Page';
+  // import { PageWrapper } from '@/components/Page';
   import { useMessage } from '@/hooks/web/useMessage';
   // import { vxeTableColumns } from '/@/views/demo/table/tableData';
   import { findPageList } from '@/api/sys/dataview';
@@ -41,12 +41,14 @@
       { type: 'seq', width: 60 },
       {
         field: 'title',
-        title: 'title',
+        title: '标题',
         filters: nameOptions.value,
+        width: 'auto',
+        resizable: true,
       },
-      { field: 'nickname', title: 'Nickname' },
-      { field: 'role', title: 'Role' },
-      { field: 'address', title: 'Address', showOverflow: true },
+      { field: 'date', title: '日期', width: 200 },
+      { field: 'postedFlag', title: 'posted', width: 80 },
+      { field: 'url', title: 'url', showOverflow: true },
     ],
     toolbarConfig: {
       import: true,
@@ -89,35 +91,28 @@
       enabled: true,
       items: [
         {
-          field: 'name',
-          title: '列1',
-          span: 8,
-          titlePrefix: { message: 'app.body.valid.rName', icon: 'vxe-icon-question-circle-fill' },
-          itemRender: { name: '$input', props: { placeholder: '请输入名称' } },
-        },
-        {
           field: 'title',
           // visible: false,
           title: '标题',
-          span: 8,
+          span: 4,
           titlePrefix: {
             useHTML: true,
             message:
               '点击链接：<a class="link" href="https://vxetable.cn" target="_blank">vxe-table官网</a>',
             icon: 'vxe-icon-question-circle-fill',
           },
-          itemRender: { name: '$input', props: { placeholder: '请输入邮件' } },
+          itemRender: { name: '$input', props: { placeholder: '请输入...' } },
         },
         {
           field: 'nickname',
           title: '昵称',
-          span: 8,
+          span: 4,
           itemRender: { name: '$input', props: { placeholder: '请输入昵称' } },
         },
         {
           field: 'role',
           title: '角色',
-          span: 8,
+          span: 4,
           folding: true,
           itemRender: { name: '$input', props: { placeholder: '请输入角色' } },
         },
@@ -177,11 +172,7 @@
       },
       ajax: {
         query: async ({ page, form }) => {
-          // 调用接口获取数据
           const response = await findPageList(page);
-
-          // const dataList = response;
-
           if (form.title) {
             // dataList = customFilter();
           }
@@ -192,9 +183,6 @@
             },
           };
         },
-        // queryAll: async ({ form }) => {
-        //   return await demoListApi(form);
-        // },
       },
     },
   });
