@@ -3,14 +3,15 @@ import type { AppRouteModule } from '@/router/types';
 import { LAYOUT } from '@/router/constant';
 import { t } from '@/hooks/web/useI18n';
 
+// const IFrame = () => import('@/views/sys/iframe/FrameBlank.vue');
 const dataview: AppRouteModule = {
   path: '/dataview',
   name: 'Dataview',
   component: LAYOUT,
   redirect: '/dataview/fetchtable',
   meta: {
-    hideChildrenInMenu: true,
-    icon: 'streamline:money-cash-bag-dollar-bag-payment-cash-money-finance',
+    hideChildrenInMenu: false,
+    icon: 'flat-color-icons:add-database',
     title: t('routes.dataview.dataview'),
     orderNo: 10,
   },
@@ -21,7 +22,8 @@ const dataview: AppRouteModule = {
       component: () => import('@/views/dataview/Fetchtable.vue'),
       meta: {
         title: t('routes.dataview.fetchtable'),
-        hideMenu: true,
+        hideMenu: false,
+        // ignoreKeepAlive: true,
       },
     },
   ],

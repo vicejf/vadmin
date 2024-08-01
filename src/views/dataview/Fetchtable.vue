@@ -1,33 +1,24 @@
 <template>
-  <!-- <PageWrapper
-    content="在现代成本管理的过程中，预测、决策、分析、控制和核算都是密不可分的，在预测、决策中要进行成本的分析，要对企业核算的数据进行研究，并且核算的数据也是其他各个环节的依据。"
-    contentFullHeight
-    fixedHeight
-  > -->
-  <vxe-grid ref="tableRef" v-bind="gridOptions">
-    <template #expand_content="{ row }">
-      <div>直达地址：{{ row.url }}</div>
-    </template>
-    <!-- <template #action="{ row }">
-        <TableAction outside :actions="createActions(row)" />
-      </template> -->
-  </vxe-grid>
-  <!-- </PageWrapper> -->
+  <PageWrapper contentFullHeight>
+    <vxe-grid ref="tableRef" v-bind="gridOptions">
+      <template #expand_content="{ row }">
+        <div>直达地址：{{ row.url }}</div>
+      </template>
+    </vxe-grid>
+  </PageWrapper>
 </template>
 <script lang="ts" setup>
   import { reactive, ref } from 'vue';
-  // import { ActionItem, TableAction } from '/@/components/Table';
-  // import { PageWrapper } from '@/components/Page';
-  import { useMessage } from '@/hooks/web/useMessage';
-  // import { vxeTableColumns } from '/@/views/demo/table/tableData';
+  import { PageWrapper } from '@/components/Page';
+  // import { useMessage } from '@/hooks/web/useMessage';
   import { findPageList } from '@/api/sys/dataview';
   import { VxeGridProps, VxeGridInstance } from 'vxe-table';
   import { VxeColumnPropTypes } from 'vxe-table/types/all';
 
-  const { createMessage } = useMessage();
+  // const { createMessage } = useMessage();
 
   const tableRef = ref<VxeGridInstance>();
-  const $gird = tableRef.value;
+  // const $gird = tableRef.value;
 
   interface RowVO {
     [key: string]: any;
@@ -62,42 +53,16 @@
         showOverflow: true,
       },
     ],
+    columnConfig: {
+      useKey: true,
+    },
+    rowConfig: {
+      useKey: true,
+    },
     toolbarConfig: {
       import: true,
       export: true,
       custom: true,
-      buttons: [
-        {
-          content: '在第一行新增',
-          buttonRender: {
-            name: 'AButton',
-            props: {
-              type: 'primary',
-              preIcon: 'mdi:page-next-outline',
-            },
-            events: {
-              click: () => {
-                $gird?.insert({ name: '新增的' });
-                createMessage.success('新增成功');
-              },
-            },
-          },
-        },
-        {
-          content: '在最后一行新增',
-          buttonRender: {
-            name: 'AButton',
-            props: {
-              type: 'warning',
-            },
-            events: {
-              click: () => {
-                $gird?.insertAt({ name: '新增的' }, -1);
-              },
-            },
-          },
-        },
-      ],
     },
     formConfig: {
       enabled: true,
@@ -223,33 +188,5 @@
   //   }
 
   //   return [];
-  // };
-
-  // 操作按钮（权限控制）
-  // const createActions = (record) => {
-  //   const actions: ActionItem[] = [
-  //     {
-  //       label: '详情',
-  //       onClick: () => {
-  //         console.log(record);
-  //       },
-  //     },
-  //     {
-  //       label: '编辑',
-  //       onClick: () => {},
-  //     },
-  //     {
-  //       label: '删除',
-  //       color: 'error',
-  //       popConfirm: {
-  //         title: '是否确认删除',
-  //         confirm: () => {
-  //           tableRef.value?.remove(record);
-  //         },
-  //       },
-  //     },
-  //   ];
-
-  //   return actions;
   // };
 </script>
