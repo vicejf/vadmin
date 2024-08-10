@@ -154,9 +154,9 @@
             // dataList = customFilter();
           }
           return {
-            result: response.items,
+            result: response.content,
             page: {
-              total: response.total,
+              total: response.totalElements,
             },
           };
         },
