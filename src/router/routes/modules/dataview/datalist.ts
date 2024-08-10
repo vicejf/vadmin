@@ -26,6 +26,16 @@ const dataview: AppRouteModule = {
         // ignoreKeepAlive: true,
       },
     },
+    {
+      path: 'fetchctrl',
+      name: 'FetchCtrl',
+      component: () => import('@/views/dataview/FetchCtrl.vue'),
+      meta: {
+        title: t('routes.dataview.fetchctrl'),
+        hideMenu: false,
+        // ignoreKeepAlive: true,
+      },
+    },
   ],
 };
 

@@ -12,7 +12,7 @@ function getRandomPics(count = 10): string[] {
 
 const demoList = (() => {
   const result: any[] = [];
-  for (let index = 0; index < 200; index++) {
+  for (let index = 0; index < 1; index++) {
     result.push({
       id: `${index}`,
       beginTime: '@datetime',
@@ -44,7 +44,7 @@ const demoList = (() => {
 
 export default [
   {
-    url: '/basic-api/table/getDemoList',
+    url: '/api/table/getDemoList',
     timeout: 100,
     method: 'get',
     response: ({ query }) => {

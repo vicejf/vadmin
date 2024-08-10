@@ -137,7 +137,7 @@ const menuList = (() => {
 
 export default [
   // {
-  //   url: '/basic-api/system/getAccountList',
+  //   url: '/system/getAccountList',
   //   timeout: 100,
   //   method: 'get',
   //   response: ({ query }) => {
@@ -146,7 +146,7 @@ export default [
   //   },
   // },
   // {
-  //   url: '/basic-api/system/getRoleListByPage',
+  //   url: '/system/getRoleListByPage',
   //   timeout: 100,
   //   method: 'get',
   //   response: ({ query }) => {
@@ -155,7 +155,7 @@ export default [
   //   },
   // },
   {
-    url: '/basic-api/system/setRoleStatus',
+    url: '/api/system/setRoleStatus',
     timeout: 500,
     method: 'post',
     response: ({ query }) => {
@@ -164,7 +164,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/api/system/getAllRoleList',
+    url: '/api/system/getAllRoleList',
     timeout: 100,
     method: 'get',
     response: () => {
@@ -172,7 +172,7 @@ export default [
     },
   },
   // {
-  //   url: '/basic-api/system/getDeptList',
+  //   url: '/system/getDeptList',
   //   timeout: 100,
   //   method: 'get',
   //   response: () => {
@@ -180,7 +180,7 @@ export default [
   //   },
   // },
   {
-    url: '/basic-api/system/getMenuList',
+    url: '/api/system/getMenuList',
     timeout: 100,
     method: 'get',
     response: () => {
@@ -188,7 +188,7 @@ export default [
     },
   },
   // {
-  //   url: '/basic-api/system/accountExist',
+  //   url: '/system/accountExist',
   //   timeout: 500,
   //   method: 'post',
   //   response: ({ body }) => {

@@ -22,11 +22,11 @@ export default defineApplicationConfig({
         passphrase: 'Hec123456.', // 如果证书有密码，请提供密码
       },
       proxy: {
-        '/basic-api': {
+        '/api': {
           target: 'https://localhost:8443',
           changeOrigin: true,
-          ws: true,
-          rewrite: (path) => path.replace(new RegExp(`^/basic-api`), ''),
+          // ws: true,
+          rewrite: (path) => path.replace(new RegExp(`^/api`), ''),
           // only https
           secure: false,
         },

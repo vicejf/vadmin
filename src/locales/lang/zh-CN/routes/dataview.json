@@ -1,4 +1,5 @@
 {
   "dataview": "数据预览",
-  "fetchtable": "抓取表"
+  "fetchtable": "抓取表",
+  "fetchctrl": "抓取控制"
 }

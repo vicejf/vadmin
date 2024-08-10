@@ -1,4 +1,5 @@
 {
   "dataview": "Dataview",
-  "fetchtable": "Fetchtable"
+  "fetchtable": "Fetchtable",
+  "fetchctrl": "Fetchctrl"
 }

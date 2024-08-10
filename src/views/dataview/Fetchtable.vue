@@ -1,6 +1,10 @@
 <template>
   <PageWrapper contentFullHeight>
     <vxe-grid ref="tableRef" v-bind="gridOptions">
+      <template #toolbar_buttons>
+        <!-- <vxe-button status="primary">新增</vxe-button> -->
+        <vxe-button status="primary" @click="fetchEvent">抓取</vxe-button>
+      </template>
       <template #expand_content="{ row }">
         <div>直达地址：{{ row.url }}</div>
       </template>
@@ -11,7 +15,7 @@
   import { reactive, ref } from 'vue';
   import { PageWrapper } from '@/components/Page';
   // import { useMessage } from '@/hooks/web/useMessage';
-  import { findPageList } from '@/api/sys/dataview';
+  import { findPageList, fetchData } from '@/api/sys/dataview';
   import { VxeGridProps, VxeGridInstance } from 'vxe-table';
   import { VxeColumnPropTypes } from 'vxe-table/types/all';
 
@@ -30,6 +34,14 @@
     id: 'VxeTable',
     keepSource: true,
     editConfig: { trigger: 'click', mode: 'cell', showStatus: true },
+    toolbarConfig: {
+      export: true,
+      custom: true,
+      import: true,
+      slots: {
+        buttons: 'toolbar_buttons',
+      },
+    },
     columns: [
       { type: 'checkbox', width: 50 },
       { type: 'seq', width: 60 },
@@ -58,11 +70,6 @@
     },
     rowConfig: {
       useKey: true,
-    },
-    toolbarConfig: {
-      import: true,
-      export: true,
-      custom: true,
     },
     formConfig: {
       enabled: true,
@@ -163,6 +170,9 @@
       },
     },
   });
+  const fetchEvent = () => {
+    fetchData();
+  };
   // 自定义筛选
   // const customFilter = (): RowVO[] => {
   //   if (tableRef.value) {
