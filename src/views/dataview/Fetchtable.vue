@@ -6,7 +6,7 @@
         <vxe-button status="primary" @click="fetchEvent">抓取</vxe-button>
       </template>
       <template #expand_content="{ row }">
-        <div>直达地址：{{ row.url }}</div>
+        <div>详细：{{ row.jobContent }}</div>
       </template>
     </vxe-grid>
   </PageWrapper>
@@ -55,6 +55,12 @@
           `<a href="${params.row.url}" target="_blank">${params.cellValue}</a>`,
         width: 'auto',
         resizable: true,
+      },
+      {
+        field: 'jobContent',
+        title: '内容',
+        width: 'auto',
+        visible: true,
       },
       { field: 'date', title: '日期', width: 200, sortable: true },
       { field: 'postedFlag', title: 'posted', width: 80 },
@@ -156,10 +162,12 @@
       },
       ajax: {
         query: async ({ page, form }) => {
-          const response = await findPageList(page);
-          if (form.title) {
-            // dataList = customFilter();
-          }
+          const params = {
+            pageSize: page.pageSize,
+            currentPage: page.currentPage,
+            keyword: form.title,
+          };
+          const response = await findPageList(params);
           return {
             result: response.content,
             page: {

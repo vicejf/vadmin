@@ -5,6 +5,7 @@ import { ErrorMessageMode } from '#/axios';
 enum Api {
   Query = '/api/query',
   Fetch = '/api/fetch',
+  Task = '/tasks/start',
 }
 
 /**
