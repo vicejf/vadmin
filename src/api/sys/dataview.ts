@@ -24,9 +24,9 @@ export function findPageList(params: Params, mode: ErrorMessageMode = 'modal') {
 }
 
 export function fetchData(mode: ErrorMessageMode = 'modal') {
-  return defHttp.get<any>(
+  return defHttp.post<any>(
     {
-      url: Api.Fetch,
+      url: Api.Task,
     },
     {
       errorMessageMode: mode,
