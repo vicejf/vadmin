@@ -4,6 +4,7 @@
       <template #toolbar_buttons>
         <!-- <vxe-button status="primary">新增</vxe-button> -->
         <vxe-button status="primary" @click="fetchEvent">抓取</vxe-button>
+        <vxe-button status="primary" @click="fixEvent">补全</vxe-button>
       </template>
       <template #expand_content="{ row }">
         <div>详细：{{ row.jobContent }}</div>
@@ -15,7 +16,7 @@
   import { reactive, ref } from 'vue';
   import { PageWrapper } from '@/components/Page';
   // import { useMessage } from '@/hooks/web/useMessage';
-  import { findPageList, fetchData } from '@/api/sys/dataview';
+  import { findPageList, fetchData, fixData } from '@/api/sys/dataview';
   import { VxeGridProps, VxeGridInstance } from 'vxe-table';
   import { VxeColumnPropTypes } from 'vxe-table/types/all';
 
@@ -180,6 +181,10 @@
   });
   const fetchEvent = () => {
     fetchData();
+  };
+
+  const fixEvent = () => {
+    fixData();
   };
   // 自定义筛选
   // const customFilter = (): RowVO[] => {
