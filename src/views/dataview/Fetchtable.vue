@@ -15,12 +15,12 @@
 <script lang="ts" setup>
   import { reactive, ref } from 'vue';
   import { PageWrapper } from '@/components/Page';
-  // import { useMessage } from '@/hooks/web/useMessage';
+  import { useMessage } from '@/hooks/web/useMessage';
   import { findPageList, fetchData, fixData } from '@/api/sys/dataview';
   import { VxeGridProps, VxeGridInstance } from 'vxe-table';
   import { VxeColumnPropTypes } from 'vxe-table/types/all';
 
-  // const { createMessage } = useMessage();
+  const { createMessage } = useMessage();
 
   const tableRef = ref<VxeGridInstance>();
   // const $gird = tableRef.value;
@@ -61,7 +61,7 @@
         field: 'jobContent',
         title: '内容',
         width: 'auto',
-        visible: true,
+        visible: false,
       },
       { field: 'date', title: '日期', width: 200, sortable: true },
       { field: 'postedFlag', title: 'posted', width: 80 },
@@ -179,9 +179,7 @@
       },
     },
   });
-  const fetchEvent = () => {
-    fetchData();
-  };
+  const fetchEvent = (timeout = 5000) => fetchData(timeout);
 
   const fixEvent = () => {
     fixData();

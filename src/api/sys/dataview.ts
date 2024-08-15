@@ -1,6 +1,6 @@
 import { defHttp } from '@/utils/http/axios';
 import { Params } from './model/fetchModels';
-import { ErrorMessageMode } from '#/axios';
+import { ErrorMessageMode, SuccessMessageMode } from '#/axios';
 
 enum Api {
   Query = '/api/query',
@@ -23,13 +23,14 @@ export function findPageList(params: Params, mode: ErrorMessageMode = 'modal') {
   );
 }
 
-export function fetchData(mode: ErrorMessageMode = 'modal') {
+export function fetchData(timeout: number, mode: SuccessMessageMode = 'message') {
   return defHttp.post<any>(
     {
       url: Api.Fetch,
+      timeout: timeout,
     },
     {
-      errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 }
