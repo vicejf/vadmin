@@ -58,12 +58,30 @@
         resizable: true,
       },
       {
-        field: 'jobContent',
+        field: 'vdef1',
+        title: '薪资',
+        width: 'auto',
+        showOverflow: true,
+      },
+      {
+        field: 'author',
+        title: '发布者',
+        width: 'auto',
+        showOverflow: true,
+      },
+      {
+        field: 'category',
+        title: '分类',
+        width: 'auto',
+        showOverflow: true,
+      },
+      {
+        field: 'description',
         title: '内容',
         width: 'auto',
         visible: false,
       },
-      { field: 'date', title: '日期', width: 200, sortable: true },
+      { field: 'pubDate', title: '日期', width: 200, sortable: true },
       { field: 'postedFlag', title: 'posted', width: 80 },
       {
         field: 'url',
