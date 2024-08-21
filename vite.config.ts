@@ -1,5 +1,5 @@
 import { defineApplicationConfig } from '@vben/vite-config';
-import fs from 'fs';
+// import fs from 'fs';
 
 export default defineApplicationConfig({
   overrides: {
@@ -23,7 +23,8 @@ export default defineApplicationConfig({
       // },
       proxy: {
         '/api': {
-          target: 'http://localhost:8443',
+          // target: 'http://localhost:8443',
+          target: 'http://192.168.191.20:8443',
           changeOrigin: true,
           // ws: true,
           rewrite: (path) => path.replace(new RegExp(`^/api`), ''),

@@ -7,7 +7,7 @@
         <vxe-button status="primary" @click="fixEvent">补全</vxe-button>
       </template>
       <template #expand_content="{ row }">
-        <div>详细：{{ row.jobContent }}</div>
+        <div>详细：{{ row.description }}</div>
       </template>
     </vxe-grid>
   </PageWrapper>
