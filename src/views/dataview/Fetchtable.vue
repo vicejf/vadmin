@@ -1,5 +1,5 @@
 <template>
-  <PageWrapper contentFullHeight>
+  <PageWrapper contentFullHeight fixedHeight>
     <vxe-grid ref="tableRef" v-bind="gridOptions">
       <template #toolbar_buttons>
         <!-- <vxe-button status="primary">新增</vxe-button> -->
@@ -13,21 +13,27 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { reactive, ref } from 'vue';
+  import { reactive, ref, watch } from 'vue';
   import { PageWrapper } from '@/components/Page';
   import { useMessage } from '@/hooks/web/useMessage';
   import { findPageList, fetchData, fixData } from '@/api/sys/dataview';
   import { VxeGridProps, VxeGridInstance } from 'vxe-table';
   import { VxeColumnPropTypes } from 'vxe-table/types/all';
+  import { useRootSetting } from '@/hooks/setting/useRootSetting';
+  import VxeUI, { VxeGlobalThemeName } from 'vxe-pc-ui';
 
   const { createMessage } = useMessage();
-
+  const { getDarkMode } = useRootSetting();
   const tableRef = ref<VxeGridInstance>();
   // const $gird = tableRef.value;
 
   interface RowVO {
     [key: string]: any;
   }
+
+  watch(getDarkMode, () => {
+    VxeUI.setTheme(getDarkMode.value as VxeGlobalThemeName);
+  });
 
   const nameOptions = ref<VxeColumnPropTypes.Filter[]>([{ data: '' }]);
 
@@ -53,7 +59,7 @@
         filters: nameOptions.value,
         type: 'html',
         formatter: (params) =>
-          `<a href="${params.row.url}" target="_blank">${params.cellValue}</a>`,
+          `<a href="${params.row.link}" target="_blank">${params.cellValue}</a>`,
         width: 'auto',
         resizable: true,
       },
@@ -84,8 +90,8 @@
       { field: 'pubDate', title: '日期', width: 200, sortable: true },
       { field: 'postedFlag', title: 'posted', width: 80 },
       {
-        field: 'url',
-        title: 'url',
+        field: '链接',
+        title: 'link',
         visible: false,
         showOverflow: true,
       },

@@ -1,4 +1,5 @@
 import { defineApplicationConfig } from '@vben/vite-config';
+
 // import fs from 'fs';
 
 export default defineApplicationConfig({
@@ -21,10 +22,11 @@ export default defineApplicationConfig({
       //   pfx: fs.readFileSync('keystore.p12'),
       //   passphrase: 'Hec123456.', // 如果证书有密码，请提供密码
       // },
+      port: 8080,
       proxy: {
         '/api': {
-          // target: 'http://localhost:8443',
-          target: 'http://192.168.191.20:8443',
+          target: 'http://localhost:8443',
+          // target: 'http://192.168.191.20:8443',
           changeOrigin: true,
           // ws: true,
           rewrite: (path) => path.replace(new RegExp(`^/api`), ''),
