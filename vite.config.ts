@@ -17,12 +17,12 @@ export default defineApplicationConfig({
       ],
     },
     server: {
-      host: true,
+      host: '0.0.0.0',
       // https: {
       //   pfx: fs.readFileSync('keystore.p12'),
       //   passphrase: 'Hec123456.', // 如果证书有密码，请提供密码
       // },
-      port: 8080,
+      // port: 8080,
       proxy: {
         '/api': {
           target: 'http://localhost:8443',

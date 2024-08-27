@@ -7,13 +7,13 @@
         <vxe-button status="primary" @click="fixEvent">补全</vxe-button>
       </template>
       <template #expand_content="{ row }">
-        <div>详细：{{ row.description }}</div>
+        <div v-html="row.description"></div>
       </template>
     </vxe-grid>
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { reactive, ref, watch } from 'vue';
+  import { onMounted, reactive, ref, watch } from 'vue';
   import { PageWrapper } from '@/components/Page';
   import { useMessage } from '@/hooks/web/useMessage';
   import { findPageList, fetchData, fixData } from '@/api/sys/dataview';
@@ -31,11 +31,15 @@
     [key: string]: any;
   }
 
+  onMounted(() => {
+    VxeUI.setTheme(getDarkMode.value as VxeGlobalThemeName);
+  });
+
   watch(getDarkMode, () => {
     VxeUI.setTheme(getDarkMode.value as VxeGlobalThemeName);
   });
 
-  const nameOptions = ref<VxeColumnPropTypes.Filter[]>([{ data: '' }]);
+  const nameOptions = ref<VxeColumnPropTypes.FilterItem[]>([{ data: '' }]);
 
   const gridOptions = reactive<VxeGridProps<RowVO>>({
     id: 'VxeTable',
@@ -49,10 +53,13 @@
         buttons: 'toolbar_buttons',
       },
     },
+    expandConfig: {
+      padding: true,
+    },
     columns: [
-      { type: 'checkbox', width: 50 },
-      { type: 'seq', width: 60 },
-      { type: 'expand', width: 80, slots: { content: 'expand_content' } },
+      // { type: 'checkbox', width: 50 },
+      { type: 'seq', title: 'No.', width: 45 },
+      { type: 'expand', width: 35, slots: { content: 'expand_content' } },
       {
         field: 'title',
         title: '标题',
@@ -60,7 +67,7 @@
         type: 'html',
         formatter: (params) =>
           `<a href="${params.row.link}" target="_blank">${params.cellValue}</a>`,
-        width: 'auto',
+        width: 200,
         resizable: true,
       },
       {
@@ -76,6 +83,12 @@
         showOverflow: true,
       },
       {
+        field: 'vdef2',
+        title: '地址',
+        width: 'auto',
+        showOverflow: true,
+      },
+      {
         field: 'category',
         title: '分类',
         width: 'auto',
@@ -86,12 +99,15 @@
         title: '内容',
         width: 'auto',
         visible: false,
+        type: 'html',
+        slots: { content: 'expand_content' },
       },
-      { field: 'pubDate', title: '日期', width: 200, sortable: true },
+      { field: 'pubDate', title: '日期', width: 110, sortable: true },
       { field: 'postedFlag', title: 'posted', width: 80 },
       {
-        field: '链接',
-        title: 'link',
+        field: 'link',
+        title: '链接',
+        width: 'auto',
         visible: false,
         showOverflow: true,
       },
@@ -108,51 +124,38 @@
         {
           field: 'title',
           // visible: false,
-          title: '标题',
-          span: 4,
-          titlePrefix: {
-            useHTML: true,
-            message:
-              '点击链接：<a class="link" href="https://vxetable.cn" target="_blank">vxe-table官网</a>',
-            icon: 'vxe-icon-question-circle-fill',
-          },
+          // title: '标题',
+          span: 12,
+          // titlePrefix: {
+          //   useHTML: true,
+          //   message:
+          //     '点击链接：<a class="link" href="https://vxetable.cn" target="_blank">vxe-table官网</a>',
+          //   icon: 'vxe-icon-question-circle-fill',
+          // },
           itemRender: { name: '$input', props: { placeholder: '请输入...' } },
         },
+        // {
+        //   field: 'sex',
+        //   title: '性别',
+        //   span: 4,
+        //   folding: true,
+        //   titleSuffix: { message: '注意，必填信息！', icon: 'vxe-icon-question-circle-fill' },
+        //   itemRender: { name: '$select', options: [] },
+        // },
+        // {
+        //   field: 'age',
+        //   title: '年龄',
+        //   span: 4,
+        //   folding: true,
+        //   itemRender: {
+        //     name: '$input',
+        //     props: { type: 'number', min: 1, max: 120, placeholder: '请输入年龄' },
+        //   },
+        // },
         {
-          field: 'nickname',
-          title: '昵称',
-          span: 4,
-          itemRender: { name: '$input', props: { placeholder: '请输入昵称' } },
-        },
-        {
-          field: 'role',
-          title: '角色',
-          span: 4,
-          folding: true,
-          itemRender: { name: '$input', props: { placeholder: '请输入角色' } },
-        },
-        {
-          field: 'sex',
-          title: '性别',
-          span: 8,
-          folding: true,
-          titleSuffix: { message: '注意，必填信息！', icon: 'vxe-icon-question-circle-fill' },
-          itemRender: { name: '$select', options: [] },
-        },
-        {
-          field: 'age',
-          title: '年龄',
-          span: 8,
-          folding: true,
-          itemRender: {
-            name: '$input',
-            props: { type: 'number', min: 1, max: 120, placeholder: '请输入年龄' },
-          },
-        },
-        {
-          span: 24,
+          span: 12,
           align: 'center',
-          collapseNode: true,
+          // collapseNode: true,
           itemRender: {
             name: '$buttons',
             children: [
