@@ -11,7 +11,7 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { onMounted, reactive, ref, watch } from 'vue'
+  import { reactive, ref } from 'vue'
   import { VxeGridProps, VxeGridInstance } from 'vxe-table'
   import { VxeColumnPropTypes } from 'vxe-table/types/all'
   import { useRootSetting } from '@/hooks/setting/useRootSetting'

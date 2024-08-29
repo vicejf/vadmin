@@ -1,24 +1,123 @@
 <template>
-  <Card title="项目" v-bind="$attrs">
+  <!-- <Card title="热搜" v-bind="$attrs">
     <template #extra>
       <a-button type="link" size="small">更多</a-button>
-    </template>
+    </template> -->
 
-    <CardGrid v-for="item in groupItems" :key="item.title" class="!md:w-1/3 !w-full">
-      <span class="flex">
-        <Icon :icon="item.icon" :color="item.color" size="30" />
-        <span class="text-lg ml-4">{{ item.title }}</span>
-      </span>
-      <div class="flex mt-2 h-10 text-secondary">{{ item.desc }}</div>
-      <div class="flex justify-between text-secondary">
-        <span>{{ item.group }}</span>
-        <span>{{ item.date }}</span>
+  <Collapse v-model:activeKey="activeKey" class="!w-full">
+    <CollapsePanel key="1" header="百度热搜">
+      <div :class="`${prefixCls}__container`">
+        <List>
+          <template v-for="item in searchList" :key="item.id">
+            <List.Item>
+              <List.Item.Meta>
+                <template #description>
+                  <div :class="`${prefixCls}__content`">
+                    {{ item.content }}
+                  </div>
+                  <div :class="`${prefixCls}__action`">
+                    <template v-for="action in actions" :key="action.icon">
+                      <div :class="`${prefixCls}__action-item`">
+                        <Icon
+                          v-if="action.icon"
+                          :class="`${prefixCls}__action-icon`"
+                          :icon="action.icon"
+                          :color="action.color"
+                        />
+                        {{ action.text }}
+                      </div>
+                    </template>
+                    <span :class="`${prefixCls}__time`">{{ item.time }}</span>
+                  </div>
+                </template>
+                <template #title>
+                  <p :class="`${prefixCls}__title`">
+                    {{ item.title }}
+                  </p>
+                  <div>
+                    <template v-for="tag in item.description" :key="tag">
+                      <Tag class="mb-2">
+                        {{ tag }}
+                      </Tag>
+                    </template>
+                  </div>
+                </template>
+              </List.Item.Meta>
+            </List.Item>
+          </template>
+        </List>
       </div>
-    </CardGrid>
-  </Card>
+    </CollapsePanel>
+    <CollapsePanel key="2" header="This is panel header 2">
+      <p>{{ text }}</p>
+    </CollapsePanel>
+    <CollapsePanel key="3" header="This is panel header 3" collapsible="disabled">
+      <p>{{ text }}</p>
+    </CollapsePanel>
+  </Collapse>
+  <!-- </Card> -->
 </template>
 <script lang="ts" setup>
-  import { Card, CardGrid } from 'ant-design-vue';
-  import Icon from '@/components/Icon/Icon.vue';
-  import { groupItems } from './data';
+  import { Card, Collapse, CollapsePanel, List } from 'ant-design-vue'
+  import { ref } from 'vue'
+  import { actions, searchList } from './datax'
+
+  const text = ref(
+    `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`
+  )
+  const activeKey = ref(['1'])
+
+  const prefixCls = 'list-search'
 </script>
+<style lang="less" scoped>
+  .list-search {
+    &__header {
+      &-form {
+        margin-bottom: -16px;
+      }
+    }
+
+    &__container {
+      padding: 12px;
+      background-color: @component-background;
+    }
+
+    &__title {
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+
+    &__content {
+      color: @text-color-secondary;
+    }
+
+    &__action {
+      margin-top: 10px;
+
+      &-item {
+        display: inline-block;
+        padding: 0 16px;
+        color: @text-color-secondary;
+
+        &:nth-child(1) {
+          padding-left: 0;
+        }
+
+        &:nth-child(1),
+        &:nth-child(2) {
+          border-right: 1px solid @border-color-base;
+        }
+      }
+
+      &-icon {
+        margin-right: 3px;
+      }
+    }
+
+    &__time {
+      position: absolute;
+      right: 20px;
+      color: rgb(0 0 0 / 45%);
+    }
+  }
+</style>

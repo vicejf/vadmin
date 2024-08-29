@@ -10,9 +10,9 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { BasicForm, FormSchema, useForm } from '@/components/Form';
-  import { CollapseContainer } from '@/components/Container';
-  import { PageWrapper } from '@/components/Page';
+  import { BasicForm, FormSchema, useForm } from '@/components/Form'
+  import { CollapseContainer } from '@/components/Container'
+  import { PageWrapper } from '@/components/Page'
 
   const getSchamas = (): FormSchema[] => {
     return [
@@ -21,73 +21,73 @@
         component: 'Input',
         label: '字段1',
         colProps: {
-          span: 8,
+          span: 8
         },
         componentProps: {
           placeholder: '自定义placeholder',
           onChange: (e: any) => {
-            console.log(e);
-          },
-        },
+            console.log(e)
+          }
+        }
       },
       {
         field: 'field2',
         component: 'Input',
         label: '字段2',
         colProps: {
-          span: 8,
-        },
+          span: 8
+        }
       },
       {
         field: 'field3',
         component: 'DatePicker',
         label: '字段3',
         colProps: {
-          span: 8,
-        },
+          span: 8
+        }
       },
       {
         field: 'field4',
         component: 'Select',
         label: '字段4',
         colProps: {
-          span: 8,
+          span: 8
         },
         componentProps: {
           options: [
             {
               label: '选项1',
               value: '1',
-              key: '1',
+              key: '1'
             },
             {
               label: '选项2',
               value: '2',
-              key: '2',
-            },
-          ],
-        },
+              key: '2'
+            }
+          ]
+        }
       },
       {
         field: 'field5',
         component: 'CheckboxGroup',
         label: '字段5',
         colProps: {
-          span: 8,
+          span: 8
         },
         componentProps: {
           options: [
             {
               label: '选项1',
-              value: '1',
+              value: '1'
             },
             {
               label: '选项2',
-              value: '2',
-            },
-          ],
-        },
-      },
+              value: '2'
+            }
+          ]
+        }
+      }
       // {
       //   field: 'field7',
       //   component: 'RadioGroup',
@@ -108,8 +108,8 @@
       //     ],
       //   },
       // },
-    ];
-  };
+    ]
+  }
 
   function getAppendSchemas(): FormSchema[] {
     return [
@@ -118,54 +118,54 @@
         component: 'Input',
         label: '字段10',
         colProps: {
-          span: 8,
-        },
+          span: 8
+        }
       },
       {
         field: 'field11',
         component: 'Input',
         label: '字段11',
         colProps: {
-          span: 8,
-        },
+          span: 8
+        }
       },
       {
         field: 'field12',
         component: 'Input',
         label: '字段12',
         colProps: {
-          span: 8,
-        },
+          span: 8
+        }
       },
       {
         field: 'field13',
         component: 'Input',
         label: '字段13',
         colProps: {
-          span: 8,
-        },
-      },
-    ];
+          span: 8
+        }
+      }
+    ]
   }
   const [register] = useForm({
     labelWidth: 120,
     schemas: getSchamas(),
     actionColOptions: {
-      span: 24,
+      span: 24
     },
     compact: true,
-    showAdvancedButton: true,
-  });
-  const extraSchemas: FormSchema[] = [];
+    showAdvancedButton: true
+  })
+  const extraSchemas: FormSchema[] = []
   for (let i = 14; i < 30; i++) {
     extraSchemas.push({
       field: 'field' + i,
       component: 'Input',
       label: '字段' + i,
       colProps: {
-        span: 8,
-      },
-    });
+        span: 8
+      }
+    })
   }
   const [register1] = useForm({
     labelWidth: 120,
@@ -173,18 +173,18 @@
       ...getSchamas(),
       ...getAppendSchemas(),
       { field: '', component: 'Divider', label: '更多字段' },
-      ...extraSchemas,
+      ...extraSchemas
     ],
     actionColOptions: {
-      span: 24,
+      span: 24
     },
     compact: true,
     showAdvancedButton: true,
-    alwaysShowLines: 2,
-  });
+    alwaysShowLines: 2
+  })
 
   function onAdvancedChange(isAdvanced: boolean) {
-    console.log('isAdvanced: ' + isAdvanced);
+    console.log('isAdvanced: ' + isAdvanced)
     if (isAdvanced) {
       // do something
     } else {

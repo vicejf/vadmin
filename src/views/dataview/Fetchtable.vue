@@ -13,33 +13,33 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { onMounted, reactive, ref, watch } from 'vue';
-  import { PageWrapper } from '@/components/Page';
-  import { useMessage } from '@/hooks/web/useMessage';
-  import { findPageList, fetchData, fixData } from '@/api/sys/dataview';
-  import { VxeGridProps, VxeGridInstance } from 'vxe-table';
-  import { VxeColumnPropTypes } from 'vxe-table/types/all';
-  import { useRootSetting } from '@/hooks/setting/useRootSetting';
-  import VxeUI, { VxeGlobalThemeName } from 'vxe-pc-ui';
+  import { onMounted, reactive, ref, watch } from 'vue'
+  import { PageWrapper } from '@/components/Page'
+  import { useMessage } from '@/hooks/web/useMessage'
+  import { findPageList, fetchData, fixData } from '@/api/sys/dataview'
+  import { VxeGridProps, VxeGridInstance } from 'vxe-table'
+  import { VxeColumnPropTypes } from 'vxe-table/types/all'
+  import { useRootSetting } from '@/hooks/setting/useRootSetting'
+  import VxeUI, { VxeGlobalThemeName } from 'vxe-pc-ui'
 
-  const { createMessage } = useMessage();
-  const { getDarkMode } = useRootSetting();
-  const tableRef = ref<VxeGridInstance>();
+  const { createMessage } = useMessage()
+  const { getDarkMode } = useRootSetting()
+  const tableRef = ref<VxeGridInstance>()
   // const $gird = tableRef.value;
 
   interface RowVO {
-    [key: string]: any;
+    [key: string]: any
   }
 
   onMounted(() => {
-    VxeUI.setTheme(getDarkMode.value as VxeGlobalThemeName);
-  });
+    VxeUI.setTheme(getDarkMode.value as VxeGlobalThemeName)
+  })
 
   watch(getDarkMode, () => {
-    VxeUI.setTheme(getDarkMode.value as VxeGlobalThemeName);
-  });
+    VxeUI.setTheme(getDarkMode.value as VxeGlobalThemeName)
+  })
 
-  const nameOptions = ref<VxeColumnPropTypes.FilterItem[]>([{ data: '' }]);
+  const nameOptions = ref<VxeColumnPropTypes.FilterItem[]>([{ data: '' }])
 
   const gridOptions = reactive<VxeGridProps<RowVO>>({
     id: 'VxeTable',
@@ -50,11 +50,11 @@
       custom: true,
       import: true,
       slots: {
-        buttons: 'toolbar_buttons',
-      },
+        buttons: 'toolbar_buttons'
+      }
     },
     expandConfig: {
-      padding: true,
+      padding: true
     },
     columns: [
       // { type: 'checkbox', width: 50 },
@@ -68,31 +68,31 @@
         formatter: (params) =>
           `<a href="${params.row.link}" target="_blank">${params.cellValue}</a>`,
         width: 200,
-        resizable: true,
+        resizable: true
       },
       {
         field: 'vdef1',
         title: '薪资',
         width: 'auto',
-        showOverflow: true,
+        showOverflow: true
       },
       {
         field: 'author',
         title: '发布者',
         width: 'auto',
-        showOverflow: true,
+        showOverflow: true
       },
       {
         field: 'vdef2',
         title: '地址',
         width: 'auto',
-        showOverflow: true,
+        showOverflow: true
       },
       {
         field: 'category',
         title: '分类',
         width: 'auto',
-        showOverflow: true,
+        showOverflow: true
       },
       {
         field: 'description',
@@ -100,7 +100,7 @@
         width: 'auto',
         visible: false,
         type: 'html',
-        slots: { content: 'expand_content' },
+        slots: { content: 'expand_content' }
       },
       { field: 'pubDate', title: '日期', width: 110, sortable: true },
       { field: 'postedFlag', title: 'posted', width: 80 },
@@ -109,14 +109,14 @@
         title: '链接',
         width: 'auto',
         visible: false,
-        showOverflow: true,
-      },
+        showOverflow: true
+      }
     ],
     columnConfig: {
-      useKey: true,
+      useKey: true
     },
     rowConfig: {
-      useKey: true,
+      useKey: true
     },
     formConfig: {
       enabled: true,
@@ -132,7 +132,7 @@
           //     '点击链接：<a class="link" href="https://vxetable.cn" target="_blank">vxe-table官网</a>',
           //   icon: 'vxe-icon-question-circle-fill',
           // },
-          itemRender: { name: '$input', props: { placeholder: '请输入...' } },
+          itemRender: { name: '$input', props: { placeholder: '请输入...' } }
         },
         // {
         //   field: 'sex',
@@ -160,25 +160,25 @@
             name: '$buttons',
             children: [
               { props: { type: 'submit', content: '查询', status: 'primary' } },
-              { props: { type: 'reset', content: '重置' } },
-            ],
-          },
-        },
-      ],
+              { props: { type: 'reset', content: '重置' } }
+            ]
+          }
+        }
+      ]
     },
     importConfig: {
       // 自定义类型
-      types: ['xlsx'],
+      types: ['xlsx']
     },
     exportConfig: {
       type: 'xlsx',
       // 自定义类型
-      types: ['xlsx', 'csv', 'html', 'xml', 'txt'],
+      types: ['xlsx', 'csv', 'html', 'xml', 'txt']
     },
     pagerConfig: {
       enabled: true,
       pageSize: 10,
-      pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+      pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000]
     },
     height: 'auto',
     proxyConfig: {
@@ -186,31 +186,31 @@
       form: true, // 启用表单代理，当点击表单提交按钮时会自动触发 reload 行为
       props: {
         result: 'result',
-        total: 'page.total',
+        total: 'page.total'
       },
       ajax: {
         query: async ({ page, form }) => {
           const params = {
             pageSize: page.pageSize,
             currentPage: page.currentPage,
-            keyword: form.title,
-          };
-          const response = await findPageList(params);
+            keyword: form.title
+          }
+          const response = await findPageList(params)
           return {
             result: response.content,
             page: {
-              total: response.totalElements,
-            },
-          };
-        },
-      },
-    },
-  });
-  const fetchEvent = (timeout = 5000) => fetchData(timeout);
+              total: response.totalElements
+            }
+          }
+        }
+      }
+    }
+  })
+  const fetchEvent = (timeout = 5000) => fetchData(timeout)
 
   const fixEvent = () => {
-    fixData();
-  };
+    fixData()
+  }
   // 自定义筛选
   // const customFilter = (): RowVO[] => {
   //   if (tableRef.value) {
