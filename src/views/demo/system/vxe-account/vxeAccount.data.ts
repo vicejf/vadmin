@@ -4,12 +4,12 @@ import { deptMap } from '../account/account.data';
 export const columns: VxeGridPropTypes.Columns = [
   {
     title: '用户名',
-    field: 'account',
+    field: 'userName',
     width: 120,
   },
   {
     title: '昵称',
-    field: 'nickname',
+    field: 'realName',
     width: 120,
   },
   {
@@ -29,7 +29,7 @@ export const columns: VxeGridPropTypes.Columns = [
   },
   {
     title: '所属部门',
-    field: 'dept',
+    field: 'deptname',
     slots: {
       default: ({ row }) => {
         return deptMap[row.dept];

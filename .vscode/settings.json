@@ -174,5 +174,5 @@
   "vscodeCustomCodeColor.highlightValue": "v-auth",
   "vscodeCustomCodeColor.highlightValueColor": "#6366f1",
   "stylelint.config": {},
-  "stylelint.packageManager": "pnpm"
+  "stylelint.packageManager": "pnpm",
 }

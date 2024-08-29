@@ -26,12 +26,12 @@ export const deptMap = (() => {
 export const columns: BasicColumn[] = [
   {
     title: '用户名',
-    dataIndex: 'account',
+    dataIndex: 'userName',
     width: 120,
   },
   {
     title: '昵称',
-    dataIndex: 'nickname',
+    dataIndex: 'realName',
     width: 120,
   },
   {
@@ -122,7 +122,7 @@ export const accountFormSchema: FormSchema[] = [
     required: true,
   },
   {
-    field: 'dept',
+    field: 'deptname',
     label: '所属部门',
     component: 'TreeSelect',
     componentProps: {
