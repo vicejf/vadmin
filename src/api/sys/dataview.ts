@@ -6,6 +6,7 @@ enum Api {
   Query = '/api/query',
   Fetch = '/tasks/fetch',
   Task = '/tasks/start',
+  Hotlist = '/api/hotlist',
 }
 
 /**
@@ -38,6 +39,17 @@ export function fixData(mode: ErrorMessageMode = 'modal') {
   return defHttp.post<any>(
     {
       url: Api.Task,
+    },
+    {
+      errorMessageMode: mode,
+    },
+  );
+}
+
+export function getHotlist(mode: ErrorMessageMode = 'modal') {
+  return defHttp.get<any>(
+    {
+      url: Api.Hotlist,
     },
     {
       errorMessageMode: mode,

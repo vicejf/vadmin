@@ -1,5 +1,3 @@
-const { FLAG_UNRESTRICTED } = require("html2canvas/dist/types/css/syntax/tokenizer");
-
 module.exports = {
   printWidth: 100,
   semi: false,
