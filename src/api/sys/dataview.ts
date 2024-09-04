@@ -1,12 +1,14 @@
-import { defHttp } from '@/utils/http/axios';
-import { Params } from './model/fetchModels';
-import { ErrorMessageMode, SuccessMessageMode } from '#/axios';
+import { defHttp } from '@/utils/http/axios'
+import { Params } from './model/fetchModels'
+import { ErrorMessageMode, SuccessMessageMode } from '#/axios'
 
 enum Api {
   Query = '/api/query',
   Fetch = '/tasks/fetch',
   Task = '/tasks/start',
   Hotlist = '/api/hotlist',
+  EastMoney = '/api/eastmoney',
+  DyHotSearch = '/api/douyin',
 }
 
 /**
@@ -20,8 +22,8 @@ export function findPageList(params: Params, mode: ErrorMessageMode = 'modal') {
     },
     {
       errorMessageMode: mode,
-    },
-  );
+    }
+  )
 }
 
 export function fetchData(timeout: number, mode: SuccessMessageMode = 'message') {
@@ -32,8 +34,8 @@ export function fetchData(timeout: number, mode: SuccessMessageMode = 'message')
     },
     {
       successMessageMode: mode,
-    },
-  );
+    }
+  )
 }
 export function fixData(mode: ErrorMessageMode = 'modal') {
   return defHttp.post<any>(
@@ -42,8 +44,8 @@ export function fixData(mode: ErrorMessageMode = 'modal') {
     },
     {
       errorMessageMode: mode,
-    },
-  );
+    }
+  )
 }
 
 export function getHotlist(mode: ErrorMessageMode = 'modal') {
@@ -53,6 +55,28 @@ export function getHotlist(mode: ErrorMessageMode = 'modal') {
     },
     {
       errorMessageMode: mode,
+    }
+  )
+}
+
+export function fetchEastMoney() {
+  return defHttp.get<any>(
+    {
+      url: Api.EastMoney,
     },
-  );
+    {
+      errorMessageMode: 'none',
+    }
+  )
+}
+
+export function getDyHotSearch() {
+  return defHttp.get<any>(
+    {
+      url: Api.DyHotSearch,
+    },
+    {
+      errorMessageMode: 'none',
+    }
+  )
 }
